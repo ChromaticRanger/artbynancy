@@ -66,7 +66,9 @@ onUnmounted(() => {
         :alt="images[currentIndex].alt"
         class="min-h-[60vh] min-w-[60vw] max-h-[80vh] max-w-[80vw] object-contain"
       />
-      <div class="absolute bottom-0 left-0 right-0 bg-black text-white font-bold p-2 text-center">
+      <div
+        class="absolute bottom-0 left-0 right-0 bg-emerald-400 text-black font-bold p-1 text-center opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+      >
         {{ images[currentIndex].alt }}
       </div>
     </div>

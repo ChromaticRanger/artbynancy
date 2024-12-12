@@ -77,7 +77,7 @@ defineProps({
     <!-- Title footer -->
     <div
       v-if="title"
-      class="absolute bottom-0 left-0 right-0 bg-black text-white font-bold p-1 text-center opacity-40 group-hover:opacity-80 transition-opacity duration-300"
+      class="absolute bottom-0 left-0 right-0 bg-emerald-400 text-black font-bold p-1 text-center opacity-50 group-hover:opacity-80 transition-opacity duration-300"
     >
       {{ title }}
     </div>
