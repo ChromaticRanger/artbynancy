@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 const styles = ref({
   navButtons:
-    'bg-gray-500 text-white font-bold py-2 px-4 rounded mr-2 text-center opacity-50 hover:opacity-80 transition-opacity duration-300',
+    'bg-gray-500 text-white text-lg font-bold py-3 px-5 rounded mr-2 text-center opacity-50 hover:opacity-80 transition-opacity duration-300',
 })
 </script>
 
