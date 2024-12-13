@@ -12,8 +12,8 @@ const images = Object.entries(imageFiles).map(([path, module]) => ({
 
 // Function to generate random positions for images
 const getRandomPosition = () => {
-  const top = Math.floor(Math.random() * 80) + 10 // Random top position between 10% and 90%
-  const left = Math.floor(Math.random() * 80) + 10 // Random left position between 10% and 90%
+  const top = Math.floor(Math.random() * 90) + 5 // Random top position between 5% and 95%
+  const left = Math.floor(Math.random() * 90) + 5 // Random left position between 5% and 95%
   return { top: `${top}%`, left: `${left}%` }
 }
 
@@ -28,7 +28,7 @@ const getRandomRotation = () => {
   <div class="relative w-full h-screen overflow-hidden">
     <!-- Display images with random positions, slight overlap, and random rotation -->
     <div v-for="(image, index) in images" :key="index" class="absolute" :style="{ ...getRandomPosition(), transform: getRandomRotation() }">
-      <BaseImage :src="image.src" :alt="image.alt" :container-width="200" :container-height="200" />
+      <BaseImage :src="image.src" :alt="image.alt" :container-width="250" :container-height="250" />
     </div>
 
     <!-- Welcome text in the center of the screen -->
