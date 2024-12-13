@@ -1,5 +1,6 @@
 <script setup>
 import BaseImage from './BaseImage.vue'
+import ImageComponent from './ImageComponent.vue'
 
 defineProps({
   images: {
@@ -31,14 +32,13 @@ defineEmits(['image-click'])
     <BaseImage
       v-for="(image, index) in images"
       :key="index"
-      :src="image.src"
-      :alt="image.alt"
       :title="image.alt"
       :container-width="300"
       :container-height="300"
-      object-fit="contain"
       class="cursor-pointer"
       @click="$emit('image-click', index)"
-    />
+    >
+      <ImageComponent :src="image.src" :alt="image.alt" :width="300" :height="300" />
+    </BaseImage>
   </div>
 </template>

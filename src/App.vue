@@ -9,7 +9,7 @@ const styles = ref({
 
 <template>
   <div class="relative min-h-screen bg-gray-200">
-    <header class="absolute top-0 left-0 w-full flex justify-center pt-4 z-10">
+    <header class="w-full flex justify-center pt-4 z-10">
       <nav class="max-w-6xl">
         <div class="flex flex-row flex-wrap justify-center gap-2 mt-4">
           <RouterLink to="/" :class="styles.navButtons">Home</RouterLink>
@@ -23,10 +23,7 @@ const styles = ref({
         </div>
       </nav>
     </header>
-
-    <main class="absolute inset-0 top-16">
-      <RouterView />
-    </main>
+    <RouterView />
   </div>
 </template>
 
