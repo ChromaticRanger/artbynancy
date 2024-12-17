@@ -29,42 +29,47 @@ Object.values(groupedImages).forEach((images) => {
   selectedImages.push(...getRandomImages(images, 27))
 })
 
-// Function to generate random rotation for images
-const getRandomRotation = () => {
-  const rotation = Math.floor(Math.random() * 41) - 20 // Random rotation between -20 and 20 degrees
-  return `rotate(${rotation}deg)`
-}
-
 // Function to generate random position within a grid cell
 const getRandomPositionInCell = (imageWidth, imageHeight) => {
-  const top = Math.floor(Math.random() * 40) + 10 // Random top position between 10% and 50%
-  const left = Math.floor(Math.random() * 40) + 10 // Random left position between 10% and 50%
+  const top = Math.floor(Math.random() * 50) + 10 // Random top position between 10% and 50%
+  const left = Math.floor(Math.random() * 50) + 10 // Random left position between 10% and 50%
   return {
     top: `calc(${top}% - ${imageHeight / 2}px)`,
     left: `calc(${left}% - ${imageWidth / 2}px)`,
   }
 }
+
+// Function to generate random z-index
+const getRandomZIndex = () => {
+  return Math.floor(Math.random() * 100) // Random z-index between 0 and 99
+}
 </script>
 
 <template>
   <div class="relative w-full h-screen overflow-hidden flex items-center justify-center">
-    <div class="grid-container grid grid-cols-3 gap-2">
+    <div class="grid-container grid grid-cols-3 gap-2 opacity-90">
       <!-- Display images in grid cells with random position within cell -->
       <div v-for="(image, index) in selectedImages" :key="index" class="relative w-full h-full">
         <div
           class="absolute"
-          :style="{ ...getRandomPositionInCell(450, 450), transform: getRandomRotation() }"
+          :style="{ ...getRandomPositionInCell(600, 600), zIndex: getRandomZIndex() }"
         >
-          <ImageComponent :src="image.src" :alt="image.alt" :width="450" :height="450" />
+          <ImageComponent :src="image.src" :alt="image.alt" :width="600" :height="600" />
         </div>
       </div>
     </div>
 
+    <!-- Mask over the top section of the image grid -->
+    <div class="absolute top-2 left-0 w-full h-1/5 bg-gray-200" style="z-index: 100"></div>
+
+    <!-- Mask over the bottom section of the image grid -->
+    <div class="absolute bottom-0 left-0 w-full h-1/4 bg-gray-200" style="z-index: 100"></div>
+
     <!-- Welcome text in the center of the screen -->
-    <div class="absolute inset-0 flex items-center justify-center">
-      <h1 class="text-4xl font-bold text-white bg-black bg-opacity-50 p-4 rounded-lg">
-        Art by Nancy
-      </h1>
+    <div class="absolute inset-0 flex flex-col items-center justify-center" style="z-index: 100">
+      <p class="text-4xl font-bold text-white bg-black bg-opacity-50 p-4 rounded-lg">
+        Welcome to Art by Nancy
+      </p>
     </div>
   </div>
 </template>
