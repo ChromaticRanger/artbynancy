@@ -65,7 +65,7 @@ const getRandomZIndex = () => {
     <!-- Mask over the bottom section of the image grid -->
     <div class="absolute bottom-0 left-0 w-full h-1/4 bg-gray-200" style="z-index: 100"></div>
 
-    <!-- Welcome text in the center of the screen -->
+    <!-- Welcome text in the center of the screen - reverted to original font -->
     <div class="absolute inset-0 flex flex-col items-center justify-center" style="z-index: 100">
       <p class="text-4xl font-bold text-white bg-black bg-opacity-50 p-4 rounded-lg">
         Welcome to Art by Nancy
