@@ -46,15 +46,22 @@ const getRandomZIndex = () => {
 </script>
 
 <template>
-  <div class="relative w-full h-screen overflow-hidden flex items-center justify-center">
-    <div class="grid-container grid grid-cols-3 gap-2 opacity-90">
-      <!-- Display images in grid cells with random position within cell -->
-      <div v-for="(image, index) in selectedImages" :key="index" class="relative w-full h-full">
-        <div
-          class="absolute"
-          :style="{ ...getRandomPositionInCell(600, 600), zIndex: getRandomZIndex() }"
-        >
-          <ImageComponent :src="image.src" :alt="image.alt" :width="600" :height="600" />
+  <div class="relative w-full h-screen overflow-hidden">
+    <!-- Welcome text - positioned above the image band -->
+    <div class="w-full flex justify-center mt-8" style="z-index: 200; position: relative;">
+      <h2 class="welcome-text">Welcome</h2>
+    </div>
+    
+    <div class="flex items-center justify-center h-full">
+      <div class="grid-container grid grid-cols-3 gap-2 opacity-90">
+        <!-- Display images in grid cells with random position within cell -->
+        <div v-for="(image, index) in selectedImages" :key="index" class="relative w-full h-full">
+          <div
+            class="absolute"
+            :style="{ ...getRandomPositionInCell(600, 600), zIndex: getRandomZIndex() }"
+          >
+            <ImageComponent :src="image.src" :alt="image.alt" :width="600" :height="600" />
+          </div>
         </div>
       </div>
     </div>
@@ -64,13 +71,6 @@ const getRandomZIndex = () => {
 
     <!-- Mask over the bottom section of the image grid -->
     <div class="absolute bottom-0 left-0 w-full h-1/4 bg-gray-200" style="z-index: 100"></div>
-
-    <!-- Welcome text in the center of the screen - reverted to original font -->
-    <div class="absolute inset-0 flex flex-col items-center justify-center" style="z-index: 100">
-      <p class="text-4xl font-bold text-white bg-black bg-opacity-50 p-4 rounded-lg">
-        Welcome to Art by Nancy
-      </p>
-    </div>
   </div>
 </template>
 
@@ -81,6 +81,16 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden; /* Prevent scrollbars */
+}
+
+.welcome-text {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 4rem;
+  color: #2d3748;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+  z-index: 50;
 }
 
 .grid-container {
