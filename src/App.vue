@@ -1,10 +1,21 @@
 <script setup>
-import { ref } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { ref, computed } from 'vue'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const activeRoute = computed(() => route.path)
+
 const styles = ref({
-  navButtons:
-    'bg-[#2d3748] text-white text-lg font-bold py-3 px-5 rounded mr-2 text-center opacity-50 hover:opacity-80 transition-opacity duration-300',
+  navButtons: 'bg-[#2d3748] text-white text-lg font-bold py-3 px-5 rounded mr-2 text-center transition-opacity duration-300',
 })
+
+const isActive = (path) => {
+  if (path === '/' && activeRoute.value === '/') {
+    return true
+  }
+  return path !== '/' && activeRoute.value.startsWith(path)
+}
 </script>
 
 <template>
@@ -17,14 +28,14 @@ const styles = ref({
       </div>
       <nav class="max-w-6xl">
         <div class="flex flex-row flex-wrap justify-center gap-2 mt-4">
-          <RouterLink to="/" :class="styles.navButtons">Home</RouterLink>
-          <RouterLink to="/botanicals" :class="styles.navButtons">Botanicals</RouterLink>
-          <RouterLink to="/flora" :class="styles.navButtons">Flora</RouterLink>
-          <RouterLink to="/house" :class="styles.navButtons">House Portraits</RouterLink>
-          <RouterLink to="/italy" :class="styles.navButtons">Italy</RouterLink>
-          <RouterLink to="/sanfran" :class="styles.navButtons">San Francisco</RouterLink>
-          <RouterLink to="/roads" :class="styles.navButtons">Other Roads Travelled</RouterLink>
-          <RouterLink to="/about" :class="styles.navButtons">About</RouterLink>
+          <RouterLink to="/" :class="[styles.navButtons, {'opacity-90': isActive('/'), 'opacity-50 hover:opacity-80': !isActive('/')}]">Home</RouterLink>
+          <RouterLink to="/botanicals" :class="[styles.navButtons, {'opacity-90': isActive('/botanicals'), 'opacity-50 hover:opacity-80': !isActive('/botanicals')}]">Botanicals</RouterLink>
+          <RouterLink to="/flora" :class="[styles.navButtons, {'opacity-90': isActive('/flora'), 'opacity-50 hover:opacity-80': !isActive('/flora')}]">Flora</RouterLink>
+          <RouterLink to="/house" :class="[styles.navButtons, {'opacity-90': isActive('/house'), 'opacity-50 hover:opacity-80': !isActive('/house')}]">House Portraits</RouterLink>
+          <RouterLink to="/italy" :class="[styles.navButtons, {'opacity-90': isActive('/italy'), 'opacity-50 hover:opacity-80': !isActive('/italy')}]">Italy</RouterLink>
+          <RouterLink to="/sanfran" :class="[styles.navButtons, {'opacity-90': isActive('/sanfran'), 'opacity-50 hover:opacity-80': !isActive('/sanfran')}]">San Francisco</RouterLink>
+          <RouterLink to="/roads" :class="[styles.navButtons, {'opacity-90': isActive('/roads'), 'opacity-50 hover:opacity-80': !isActive('/roads')}]">Other Roads Travelled</RouterLink>
+          <RouterLink to="/about" :class="[styles.navButtons, {'opacity-90': isActive('/about'), 'opacity-50 hover:opacity-80': !isActive('/about')}]">About</RouterLink>
         </div>
       </nav>
     </header>
@@ -110,5 +121,11 @@ main {
   .desktop-title p {
     font-size: 1.2rem;
   }
+}
+
+/* Active navigation button style */
+.router-link-active, .router-link-exact-active {
+  opacity: 90% !important;
+  box-shadow: 0 0 5px rgba(0,0,0,0.4);
 }
 </style>
