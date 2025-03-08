@@ -35,8 +35,8 @@ const openCarousel = (index) => {
 </script>
 
 <template>
-  <div class="container mx-auto mt-16">
-    <h1 class="gallery-title mb-6">{{ title }}</h1>
+  <div class="container mx-auto mt-10">
+    <h1 class="gallery-title mb-10">{{ title }}</h1>
     <ImageGrid :images="images" :min-width="300" :gap="20" @image-click="openCarousel" />
     <ImageCarousel
       v-model:currentIndex="currentImageIndex"
