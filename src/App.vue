@@ -9,13 +9,12 @@ const styles = ref({
 
 <template>
   <div class="relative min-h-screen bg-gray-200">
-    <!-- Add the stylized title here, outside of RouterView -->
-    <div class="stylized-title" style="z-index: 200">
-      <h1>Art by Nancy</h1>
-      <p>Beautiful scenes to treasure or to share.</p>
-    </div>
-
-    <header class="w-full flex justify-center pt-4 z-10">
+    <header class="w-full flex flex-col items-center pt-4 z-10">
+      <!-- Desktop title - visible on all screens -->
+      <div class="desktop-title mb-4">
+        <h1>Art by Nancy</h1>
+        <p>Beautiful scenes to treasure or to share.</p>
+      </div>
       <nav class="max-w-6xl">
         <div class="flex flex-row flex-wrap justify-center gap-2 mt-4">
           <RouterLink to="/" :class="styles.navButtons">Home</RouterLink>
@@ -50,31 +49,66 @@ main {
   overflow: hidden;
 }
 
-/* Stylized title styles - without background */
-.stylized-title {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  transform: rotate(-12deg);
-  padding: 15px;
+/* Desktop title styles */
+.desktop-title {
   font-family: 'Brush Script MT', cursive;
   text-align: center;
-  max-width: 400px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  pointer-events: none; /* This ensures clicks pass through to elements below */
+  margin-bottom: 1rem;
 }
 
-.stylized-title h1 {
-  font-size: 4.5rem;
+.desktop-title h1 {
+  font-size: 4rem;
   margin: 0;
   color: #2d3748;
   line-height: 1.2;
 }
 
-.stylized-title p {
-  font-size: 2.5rem;
+.desktop-title p {
+  font-size: 2rem;
   margin: 5px 0 0;
   color: #4a5568;
   font-style: italic;
+}
+
+/* Responsive styles for the desktop title */
+@media (max-width: 1280px) {
+  .desktop-title h1 {
+    font-size: 3.5rem;
+  }
+  
+  .desktop-title p {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .desktop-title h1 {
+    font-size: 3rem;
+  }
+  
+  .desktop-title p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-title h1 {
+    font-size: 2.8rem;
+  }
+  
+  .desktop-title p {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .desktop-title h1 {
+    font-size: 2.5rem;
+  }
+  
+  .desktop-title p {
+    font-size: 1.2rem;
+  }
 }
 </style>
