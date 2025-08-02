@@ -49,7 +49,7 @@ const handleError = () => {
         height: typeof height === 'number' ? `${height}px` : height,
         objectFit,
       }"
-      class="rounded-lg transform transition-transform duration-300 group-hover:scale-110"
+      class="transform transition-transform duration-300"
       @load="loading = false"
       @error="handleError"
     />

@@ -1,88 +1,100 @@
 <script setup>
+import { computed, onMounted, onUnmounted } from 'vue'
 import ImageComponent from '@/components/ImageComponent.vue'
 
 // Import all images dynamically from the assets directory
 const imageFiles = import.meta.glob('@/assets/images/**/*.*', { eager: true })
 
-// Group images by their directories
-const groupedImages = {}
+// Create array of all available images
+const availableImages = []
 Object.entries(imageFiles).forEach(([path, module]) => {
-  const directory = path.split('/')[3] // Assuming directory structure is /assets/images/<directory>/*
-  if (!groupedImages[directory]) {
-    groupedImages[directory] = []
-  }
-  groupedImages[directory].push({
+  availableImages.push({
     src: module.default,
-    alt: path.split('/').pop().split('.')[0],
+    alt: path.split('/').pop().split('.')[0]
   })
 })
 
-// Function to get 5 random images from an array
-const getRandomImages = (images, count) => {
-  const shuffled = images.sort(() => 0.5 - Math.random())
-  return shuffled.slice(0, count)
-}
-
-// Select 5 random images from each directory
-const selectedImages = []
-Object.values(groupedImages).forEach((images) => {
-  selectedImages.push(...getRandomImages(images, 27))
+// Create a dense grid of images that guarantees coverage
+const selectedImages = computed(() => {
+  const images = []
+  const cellSize = 300 // Size of each grid cell
+  const cols = 12 // Number of columns (extends beyond viewport)
+  const rows = 5 // Number of rows to fill the band height completely
+  
+  let imageIndex = 0
+  
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      // Cycle through available images
+      const sourceImage = availableImages[imageIndex % availableImages.length]
+      
+      images.push({
+        src: sourceImage.src,
+        alt: sourceImage.alt,
+        x: col * (cellSize * 0.8), // 80% spacing for overlap
+        y: row * (cellSize * 0.5) - (cellSize * 0.6), // 50% spacing for tighter vertical packing
+        size: cellSize,
+        zIndex: Math.floor(Math.random() * 10) + 1,
+        id: `${row}-${col}`
+      })
+      
+      imageIndex++
+    }
+  }
+  
+  return images
 })
 
-// Function to generate random position within a grid cell
-const getRandomPositionInCell = (imageWidth, imageHeight) => {
-  const top = Math.floor(Math.random() * 50) + 10 // Random top position between 10% and 50%
-  const left = Math.floor(Math.random() * 50) + 10 // Random left position between 10% and 50%
-  return {
-    top: `calc(${top}% - ${imageHeight / 2}px)`,
-    left: `calc(${left}% - ${imageWidth / 2}px)`,
-  }
-}
+// Prevent scrolling only on the home page
+onMounted(() => {
+  document.body.style.overflow = 'hidden'
+  document.documentElement.style.overflow = 'hidden'
+})
 
-// Function to generate random z-index
-const getRandomZIndex = () => {
-  return Math.floor(Math.random() * 100) // Random z-index between 0 and 99
-}
+onUnmounted(() => {
+  document.body.style.overflow = ''
+  document.documentElement.style.overflow = ''
+})
 </script>
 
 <template>
-  <div class="relative w-full h-screen overflow-hidden">
+  <div class="relative w-full h-screen overflow-hidden bg-gray-200">
     <!-- Welcome text - positioned above the image band -->
-    <div class="w-full flex justify-center mt-8" style="z-index: 200; position: relative;">
+    <div class="absolute top-8 left-0 right-0 flex justify-center z-50">
       <h2 class="welcome-text">Welcome</h2>
     </div>
     
-    <div class="flex items-center justify-center h-full">
-      <div class="grid-container grid grid-cols-3 gap-2 opacity-90">
-        <!-- Display images in grid cells with random position within cell -->
-        <div v-for="(image, index) in selectedImages" :key="index" class="relative w-full h-full">
-          <div
-            class="absolute"
-            :style="{ ...getRandomPositionInCell(600, 600), zIndex: getRandomZIndex() }"
-          >
-            <ImageComponent :src="image.src" :alt="image.alt" :width="600" :height="600" />
-          </div>
+    <!-- Image band container - centered in the middle of the screen -->
+    <div class="absolute left-0 right-0 image-band-container">
+      <div class="image-band">
+        <!-- Create overlapping grid of images -->
+        <div 
+          v-for="image in selectedImages" 
+          :key="image.id" 
+          class="image-cell"
+          :style="{
+            left: `${image.x}px`,
+            top: `${image.y}px`,
+            zIndex: image.zIndex,
+            width: `${image.size}px`,
+            height: `${image.size}px`
+          }"
+        >
+          <ImageComponent 
+            :src="image.src" 
+            :alt="image.alt" 
+            :width="image.size" 
+            :height="image.size" 
+            objectFit="cover"
+            class="full-image"
+          />
         </div>
       </div>
     </div>
-
-    <!-- Mask over the top section of the image grid -->
-    <div class="absolute top-2 left-0 w-full h-1/5 bg-gray-200" style="z-index: 100"></div>
-
-    <!-- Mask over the bottom section of the image grid -->
-    <div class="absolute bottom-0 left-0 w-full h-1/4 bg-gray-200" style="z-index: 100"></div>
   </div>
 </template>
 
 <style scoped>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden; /* Prevent scrollbars */
-}
-
 .welcome-text {
   font-family: 'Brush Script MT', cursive;
   font-size: 4rem;
@@ -90,28 +102,46 @@ body {
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
-  z-index: 50;
 }
 
-.grid-container {
-  width: 100vw; /* Two-thirds of the viewport width */
-  height: 40vh; /* Two-thirds of the viewport height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
-}
-
-.relative {
-  position: relative;
-}
-
-.absolute {
+.image-band-container {
   position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  height: 45vh;
+  overflow: hidden;
+  background: transparent;
+}
+
+.image-band {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.image-cell {
+  position: absolute;
+  overflow: hidden;
+}
+
+/* Force images to fill their containers completely */
+.full-image {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:deep(img) {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border: none !important;
+  outline: none !important;
 }
 </style>
