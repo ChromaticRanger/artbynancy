@@ -23,10 +23,10 @@ defineEmits(['image-click'])
 
 <template>
   <div
-    class="grid w-full"
+    class="grid w-full justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-auto-fit"
     :style="{
-      gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}px, 1fr))`,
       gap: `${gap}px`,
+      '--min-width': `${minWidth}px`,
     }"
   >
     <BaseImage
@@ -42,3 +42,11 @@ defineEmits(['image-click'])
     </BaseImage>
   </div>
 </template>
+
+<style scoped>
+@media (min-width: 1024px) {
+  .lg\:grid-cols-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-width), 1fr));
+  }
+}
+</style>

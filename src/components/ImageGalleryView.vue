@@ -35,7 +35,7 @@ const openCarousel = (index) => {
 </script>
 
 <template>
-  <div class="container mx-auto mt-10">
+  <div class="container mx-auto mt-10 px-4 md:px-6 lg:px-8">
     <h1 class="gallery-title mb-10">{{ title }}</h1>
     <ImageGrid :images="images" :min-width="300" :gap="20" @image-click="openCarousel" />
     <ImageCarousel

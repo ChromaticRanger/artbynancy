@@ -2,7 +2,7 @@
   <div class="about-container max-w-4xl mx-auto px-6 py-12">
     <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">About Nancy</h1>
 
-    <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
+    <div class="prose prose-4xl max-w-none text-gray-700 leading-relaxed space-y-6">
       <p>
         Nancy Niederhauser's art is rooted in a lifelong love of drawing and painting. From her earliest years, she immersed herself in art, taking classes in drawing, painting, and art history alongside her formal education. Even while dedicating decades to her career as a mental health professional, she continued to pursue her creative passions, exploring subjects from life drawing to landscapes.
       </p>
@@ -16,7 +16,7 @@
       </p>
 
       <p>
-        Nancy's work has been exhibited in San Francisco galleries and boutiques, including the Museo Italo Americano, and many of her paintings are held in private collections. She has continued her artistic development through classes from San Francisco to Bristol, England, where she now spends much of the year. Beyond exhibitions, she delights in making her work accessible—offering notecards, prints, and commissions, particularly her much-loved house portraits.
+        Nancy's work has been exhibited in San Francisco galleries and boutiques, including the Museo Italo Americano, and many of her paintings are held in private collections. She has continued her artistic development through classes from San Francisco to Bristol, England, where she lives with her English husband Martin. Beyond exhibitions, she delights in making her work accessible—offering notecards, prints, and commissions, particularly her much-loved house portraits.
       </p>
 
       <p>
@@ -25,6 +25,10 @@
 
       <p>
         Nancy remains devoted to sharing her art in ways that spark connection—whether through a commissioned portrait of a beloved home, a floral print that brightens a room, or a captured memory from her travels. Her paintings, at once intimate and welcoming, reflect her belief that art tells stories, preserves beauty, and creates lasting connections.
+      </p>
+
+      <p>
+        If you want to contact Nancy about her art please do so at <a href="mailto:nancenh@hotmail.com" class="text-blue-600 hover:text-blue-800 underline">nancenh@hotmail.com</a>
       </p>
     </div>
   </div>
@@ -38,9 +42,7 @@
 .prose p {
   text-align: justify;
   text-indent: 1.5em;
-}
-
-.prose p:first-of-type {
-  text-indent: 0;
+  font-size: 1.25rem;
+  line-height: 1.8;
 }
 </style>
