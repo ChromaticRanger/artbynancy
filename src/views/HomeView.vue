@@ -1,6 +1,13 @@
 <script setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import ImageComponent from '@/components/ImageComponent.vue'
+
+// Reactive window width for responsive behavior
+const windowWidth = ref(window.innerWidth)
+
+const updateWindowWidth = () => {
+  windowWidth.value = window.innerWidth
+}
 
 // Import all images dynamically from the assets directory
 const imageFiles = import.meta.glob('@/assets/images/**/*.*', { eager: true })
@@ -14,12 +21,38 @@ Object.entries(imageFiles).forEach(([path, module]) => {
   })
 })
 
+// Responsive breakpoints and grid configuration
+const getResponsiveConfig = computed(() => {
+  const width = windowWidth.value
+
+  if (width < 768) {
+    // Mobile
+    return {
+      cellSize: 150,
+      cols: 8,
+      rows: 4
+    }
+  } else if (width < 1024) {
+    // Tablet
+    return {
+      cellSize: 200,
+      cols: 10,
+      rows: 4
+    }
+  } else {
+    // Desktop
+    return {
+      cellSize: 300,
+      cols: 12,
+      rows: 5
+    }
+  }
+})
+
 // Create a dense grid of images that guarantees coverage
 const selectedImages = computed(() => {
   const images = []
-  const cellSize = 300 // Size of each grid cell
-  const cols = 12 // Number of columns (extends beyond viewport)
-  const rows = 5 // Number of rows to fill the band height completely
+  const { cellSize, cols, rows } = getResponsiveConfig.value
   
   let imageIndex = 0
   
@@ -49,11 +82,13 @@ const selectedImages = computed(() => {
 onMounted(() => {
   document.body.style.overflow = 'hidden'
   document.documentElement.style.overflow = 'hidden'
+  window.addEventListener('resize', updateWindowWidth)
 })
 
 onUnmounted(() => {
   document.body.style.overflow = ''
   document.documentElement.style.overflow = ''
+  window.removeEventListener('resize', updateWindowWidth)
 })
 </script>
 
@@ -102,6 +137,19 @@ onUnmounted(() => {
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
+}
+
+/* Responsive welcome text */
+@media (max-width: 767px) {
+  .welcome-text {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .welcome-text {
+    font-size: 3rem;
+  }
 }
 
 .image-band-container {
