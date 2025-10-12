@@ -41,7 +41,6 @@
 
 .prose p {
   text-align: justify;
-  text-indent: 1.5em;
   font-size: 1.25rem;
   line-height: 1.8;
 }
