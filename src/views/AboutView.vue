@@ -4,7 +4,7 @@
 
     <div class="prose prose-4xl max-w-none text-gray-700 leading-relaxed space-y-6">
       <p>
-      Nancy Niederhauser's art is rooted in a lifelong love of drawing and painting. From her earliest years, she immersed herself in art, taking classes in drawing, painting, and art history alongside her formal education. Even while dedicating decades to her career as a mental health professional, she continued to pursue her creative passions, exploring subjects from life drawing to landscapes.
+      Nancy Niederhauser's art is rooted in a lifelong love of drawing and painting. From her earliest years, she wove art into her life, taking classes in drawing, painting, and art history alongside her formal education. Even while dedicating decades to her career as a mental health professional, she continued to pursue her creative passions, exploring subjects from life drawing to landscapes.
       </p>
 
       <p>
