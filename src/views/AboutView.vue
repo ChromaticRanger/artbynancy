@@ -28,7 +28,7 @@
       </p>
 
       <p>
-      If you want to contact Nancy about her art please do so at nancyniedehauserart@gmail.com
+      If you want to contact Nancy about her art please do so at <b>nancyniedehauserart@gmail.com</b>
       </p>
     </div>
   </div>
