@@ -29,13 +29,13 @@ const isActive = (path) => {
       <nav class="max-w-6xl">
         <div class="flex flex-row flex-wrap justify-center gap-2 mt-4">
           <RouterLink to="/" :class="[styles.navButtons, {'opacity-90': isActive('/'), 'opacity-50 hover:opacity-80': !isActive('/')}]">Home</RouterLink>
+          <RouterLink to="/about" :class="[styles.navButtons, {'opacity-90': isActive('/about'), 'opacity-50 hover:opacity-80': !isActive('/about')}]">About</RouterLink>
           <RouterLink to="/botanicals" :class="[styles.navButtons, {'opacity-90': isActive('/botanicals'), 'opacity-50 hover:opacity-80': !isActive('/botanicals')}]">Botanicals</RouterLink>
           <RouterLink to="/flora" :class="[styles.navButtons, {'opacity-90': isActive('/flora'), 'opacity-50 hover:opacity-80': !isActive('/flora')}]">Flora</RouterLink>
           <RouterLink to="/house" :class="[styles.navButtons, {'opacity-90': isActive('/house'), 'opacity-50 hover:opacity-80': !isActive('/house')}]">House Portraits</RouterLink>
           <RouterLink to="/italy" :class="[styles.navButtons, {'opacity-90': isActive('/italy'), 'opacity-50 hover:opacity-80': !isActive('/italy')}]">Italy</RouterLink>
           <RouterLink to="/sanfran" :class="[styles.navButtons, {'opacity-90': isActive('/sanfran'), 'opacity-50 hover:opacity-80': !isActive('/sanfran')}]">San Francisco</RouterLink>
           <RouterLink to="/roads" :class="[styles.navButtons, {'opacity-90': isActive('/roads'), 'opacity-50 hover:opacity-80': !isActive('/roads')}]">Other Roads Travelled</RouterLink>
-          <RouterLink to="/about" :class="[styles.navButtons, {'opacity-90': isActive('/about'), 'opacity-50 hover:opacity-80': !isActive('/about')}]">About</RouterLink>
         </div>
       </nav>
     </header>
@@ -87,7 +87,7 @@ main {
   .desktop-title h1 {
     font-size: 3.5rem;
   }
-  
+
   .desktop-title p {
     font-size: 1.8rem;
   }
@@ -97,7 +97,7 @@ main {
   .desktop-title h1 {
     font-size: 3rem;
   }
-  
+
   .desktop-title p {
     font-size: 1.5rem;
   }
@@ -107,7 +107,7 @@ main {
   .desktop-title h1 {
     font-size: 2.8rem;
   }
-  
+
   .desktop-title p {
     font-size: 1.4rem;
   }
@@ -117,7 +117,7 @@ main {
   .desktop-title h1 {
     font-size: 2.5rem;
   }
-  
+
   .desktop-title p {
     font-size: 1.2rem;
   }
