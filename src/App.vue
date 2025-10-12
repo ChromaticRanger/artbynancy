@@ -23,7 +23,7 @@ const isActive = (path) => {
     <header class="w-full flex flex-col items-center pt-4 z-10">
       <!-- Desktop title - visible on all screens -->
       <div class="desktop-title mb-4">
-        <h1>Art by Nancy</h1>
+        <h1>Nancy Niederhauser Art</h1>
         <p>Beautiful scenes to treasure or to share.</p>
       </div>
       <nav class="max-w-6xl">
