@@ -75,6 +75,15 @@ const router = createRouter({
         description: 'Explore Nancy Niederhauser\'s diverse collection of travel and landscape paintings from various journeys. Original artwork capturing memorable places and moments.'
       }
     },
+    {
+      path: '/england',
+      name: 'england',
+      component: () => import('../views/EnglandView.vue'),
+      meta: {
+        title: 'England Paintings - Nancy Niederhauser Art',
+        description: 'Explore Nancy Niederhauser\'s England paintings capturing the beauty of the English countryside and gardens. Original artwork inspired by life in Bristol and beyond.'
+      }
+    },
   ],
 })
 

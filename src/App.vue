@@ -35,6 +35,7 @@ const isActive = (path) => {
           <RouterLink to="/house" :class="[styles.navButtons, {'opacity-90': isActive('/house'), 'opacity-50 hover:opacity-80': !isActive('/house')}]">House Portraits</RouterLink>
           <RouterLink to="/italy" :class="[styles.navButtons, {'opacity-90': isActive('/italy'), 'opacity-50 hover:opacity-80': !isActive('/italy')}]">Italy</RouterLink>
           <RouterLink to="/sanfran" :class="[styles.navButtons, {'opacity-90': isActive('/sanfran'), 'opacity-50 hover:opacity-80': !isActive('/sanfran')}]">San Francisco</RouterLink>
+          <RouterLink to="/england" :class="[styles.navButtons, {'opacity-90': isActive('/england'), 'opacity-50 hover:opacity-80': !isActive('/england')}]">England</RouterLink>
           <RouterLink to="/roads" :class="[styles.navButtons, {'opacity-90': isActive('/roads'), 'opacity-50 hover:opacity-80': !isActive('/roads')}]">Other Roads Travelled</RouterLink>
         </div>
       </nav>
