@@ -7,7 +7,7 @@ const route = useRoute()
 const activeRoute = computed(() => route.path)
 
 const styles = ref({
-  navButtons: 'bg-[#2d3748] text-white text-lg font-bold py-3 px-5 rounded mr-2 text-center transition-opacity duration-300',
+  navButtons: 'bg-[#2d3748] text-white text-lg font-bold py-1 px-3 rounded mr-2 text-center transition-opacity duration-300',
 })
 
 const isActive = (path) => {
