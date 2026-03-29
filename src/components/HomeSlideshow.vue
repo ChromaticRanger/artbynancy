@@ -159,7 +159,7 @@ onUnmounted(() => {
 
 .dots {
   position: absolute;
-  bottom: 3.5rem;
+  bottom: calc(3.5rem + 10px);
   left: 0;
   right: 0;
   display: flex;
