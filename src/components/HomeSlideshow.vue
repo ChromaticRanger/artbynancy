@@ -110,7 +110,6 @@ onUnmounted(() => {
       <Transition name="fade">
         <div v-if="slides.length && slides[currentIndex]" :key="currentIndex" class="slide">
           <img :src="slides[currentIndex].src" :alt="slides[currentIndex].alt" class="slide-image" />
-          <div class="slide-caption">{{ slides[currentIndex].label }}</div>
         </div>
       </Transition>
     </div>
@@ -158,20 +157,6 @@ onUnmounted(() => {
   object-position: top;
 }
 
-.slide-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0.75rem 1.5rem;
-  background: rgba(0, 0, 0, 0.45);
-  font-family: 'Brush Script MT', cursive;
-  font-size: 2rem;
-  color: #fff;
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-}
-
 .dots {
   position: absolute;
   bottom: 3.5rem;
@@ -214,11 +199,7 @@ onUnmounted(() => {
     height: calc(100vh - 220px);
   }
 
-  .slide-caption {
-    font-size: 1.5rem;
-  }
-
-  .nav-btn {
+.nav-btn {
     font-size: 2.25rem;
     padding: 0.2rem 0.6rem;
   }
