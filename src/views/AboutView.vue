@@ -8,7 +8,7 @@
       </p>
 
       <p>
-      Her artistic journey took a defining turn in 1996 during a trip to Northern Italy. Inspired by the beauty of its architecture, gardens, and streets, she filled sketchbooks with pen and pastel illustrations. That experience reignited her commitment to painting and at the urging of a friend soon led to the launch of NanceNotes in 1997—a line of her holiday cards and notecards, inspired by her travels.
+      Her artistic journey took a defining turn in 1996 during a trip to Northern Italy. Inspired by the beauty of its architecture, gardens, and streets, she filled sketchbooks with pen and pastel illustrations. That experience reignited her commitment to painting and at the urging of a friend soon led to the launch of her first website in 1997—a line of her holiday cards and notecards, inspired by her travels.
       </p>
 
       <p>

@@ -7,7 +7,7 @@ const route = useRoute()
 const activeRoute = computed(() => route.path)
 
 const styles = ref({
-  navButtons: 'bg-[#2d3748] text-white text-lg font-bold py-1 px-3 rounded mr-2 text-center transition-opacity duration-300',
+  navButtons: 'bg-[#2d3748] text-white text-sm font-bold py-1 px-2 rounded mr-1 text-center transition-opacity duration-300',
 })
 
 const isActive = (path) => {
@@ -22,12 +22,12 @@ const isActive = (path) => {
   <div class="relative min-h-screen bg-gray-200">
     <header class="w-full flex flex-col items-center pt-4 z-10">
       <!-- Desktop title - visible on all screens -->
-      <div class="desktop-title mb-4">
+      <div class="desktop-title mb-1">
         <h1>Nancy Niederhauser Art</h1>
         <p>Beautiful scenes to treasure or to share.</p>
       </div>
       <nav class="max-w-6xl">
-        <div class="flex flex-row flex-wrap justify-center gap-2 mt-4">
+        <div class="flex flex-row flex-wrap justify-center gap-2 mt-1">
           <RouterLink to="/" :class="[styles.navButtons, {'opacity-90': isActive('/'), 'opacity-50 hover:opacity-80': !isActive('/')}]">Home</RouterLink>
           <RouterLink to="/about" :class="[styles.navButtons, {'opacity-90': isActive('/about'), 'opacity-50 hover:opacity-80': !isActive('/about')}]">About</RouterLink>
           <RouterLink to="/botanicals" :class="[styles.navButtons, {'opacity-90': isActive('/botanicals'), 'opacity-50 hover:opacity-80': !isActive('/botanicals')}]">Botanicals</RouterLink>
@@ -106,21 +106,21 @@ main {
 
 @media (max-width: 768px) {
   .desktop-title h1 {
-    font-size: 2.8rem;
+    font-size: 2.2rem;
   }
 
   .desktop-title p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .desktop-title h1 {
-    font-size: 2.5rem;
+    font-size: 1.7rem;
   }
 
   .desktop-title p {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
 
