@@ -3,6 +3,16 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 const imageFiles = import.meta.glob('@/assets/images/**/*.*', { eager: true })
 
+const categoryOrder = [
+  'botanicals',
+  'flora',
+  'house-portraits',
+  'italy',
+  'san-francisco',
+  'england',
+  'other-roads',
+]
+
 const categoryNames = {
   'botanicals': 'Botanicals',
   'england': 'England',
@@ -26,75 +36,53 @@ Object.entries(imageFiles).forEach(([path, module]) => {
   })
 })
 
-const MIN_RESOLUTION = 1000 // minimum pixels on the longer side
 
-const getImageInfo = (src) =>
-  new Promise((resolve) => {
-    const img = new Image()
-    img.onload = () =>
-      resolve({
-        portrait: img.naturalHeight > img.naturalWidth,
-        highRes: Math.max(img.naturalWidth, img.naturalHeight) >= MIN_RESOLUTION,
-      })
-    img.onerror = () => resolve({ portrait: false, highRes: false })
-    img.src = src
-  })
-
-// pools[i] = { label, images: [...], lastSrc: null }
+// pools[i] = { label, images: [...], cycleIndex: 0 }
 const pools = []
 const slides = ref([])
 const currentIndex = ref(0)
 
-const pickFromPool = (pool) => {
-  const candidates =
-    pool.images.length > 1 ? pool.images.filter((img) => img.src !== pool.lastSrc) : pool.images
-  const image = candidates[Math.floor(Math.random() * candidates.length)]
-  pool.lastSrc = image.src
-  return image
-}
+const buildSlides = () =>
+  pools.map((pool) => ({
+    src: pool.images[pool.cycleIndex].src,
+    alt: pool.images[pool.cycleIndex].alt,
+    label: pool.label,
+  }))
 
 const goTo = (index) => {
-  const newIndex = (index + pools.length) % pools.length
-  const image = pickFromPool(pools[newIndex])
-  slides.value[newIndex] = { src: image.src, alt: image.alt, label: pools[newIndex].label }
-  currentIndex.value = newIndex
+  currentIndex.value = (index + pools.length) % pools.length
 }
 
-const next = () => goTo(currentIndex.value + 1)
+const next = () => {
+  const nextIndex = (currentIndex.value + 1) % pools.length
+  if (nextIndex === 0) {
+    // Completed a full cycle — advance each pool to its next image
+    pools.forEach((pool) => {
+      pool.cycleIndex = (pool.cycleIndex + 1) % pool.images.length
+    })
+    slides.value = buildSlides()
+  }
+  currentIndex.value = nextIndex
+}
 
 let interval = null
 
-onMounted(async () => {
+onMounted(() => {
   pools.length = 0 // reset in case of HMR re-mount
 
-  const entries = await Promise.all(
-    Object.entries(byCategory).map(async ([category, images]) => {
-      const checked = await Promise.all(
-        images.map(async (img) => ({ img, ...(await getImageInfo(img.src)) })),
-      )
-
-      const portraitHighRes = checked.filter(({ portrait, highRes }) => portrait && highRes).map(({ img }) => img)
-      const portraitAny = checked.filter(({ portrait }) => portrait).map(({ img }) => img)
-
-      // Prefer portrait + high-res, fall back to portrait any-res, then all images
-      const pool =
-        portraitHighRes.length > 0 ? portraitHighRes : portraitAny.length > 0 ? portraitAny : images
-
-      return {
-        label: categoryNames[category] || category,
-        images: pool,
-        lastSrc: null,
-      }
-    }),
-  )
+  const entries = categoryOrder.map((category) => {
+    const images = byCategory[category] ?? []
+    return {
+      label: categoryNames[category] || category,
+      images,
+      cycleIndex: images.length > 0 ? Math.floor(Math.random() * images.length) : 0,
+    }
+  })
 
   pools.push(...entries)
 
-  // Pick initial image for each slot
-  slides.value = pools.map((pool) => {
-    const image = pickFromPool(pool)
-    return { src: image.src, alt: image.alt, label: pool.label }
-  })
+  // Pick first image from each category for cycle 1
+  slides.value = buildSlides()
 
   interval = setInterval(next, 4000)
 })
