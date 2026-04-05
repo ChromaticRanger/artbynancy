@@ -19,7 +19,7 @@ const categoryNames = {
   'flora': 'Flora',
   'house-portraits': 'House Portraits',
   'italy': 'Italy',
-  'other-roads': 'Other Roads Travelled',
+  'other-roads': 'Other Roads & Studies',
   'san-francisco': 'San Francisco',
 }
 

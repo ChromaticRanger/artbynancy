@@ -3,5 +3,5 @@ import ImageGalleryView from '@/components/ImageGalleryView.vue'
 </script>
 
 <template>
-  <ImageGalleryView title="Other Roads Travelled" imagePath="other-roads" />
+  <ImageGalleryView title="Other Roads & Studies" imagePath="other-roads" />
 </template>
